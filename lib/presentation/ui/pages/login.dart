@@ -1,18 +1,21 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:marketing_questions/presentation/ui/pages/home.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key key}) : super(key: key);
 
   static const routeName = '/';
-  FirebaseAuth auth = FirebaseAuth.instance;
+  auth.FirebaseAuth _auth = auth.FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("login test"),
+        title: Text(Platform.isIOS ? 'iOS Device Info' : 'Android Device Info'),
       ),
       body: Center(
         child: Column(
@@ -22,8 +25,8 @@ class LoginPage extends StatelessWidget {
               child: Text("login"),
               onPressed: () async {
                 try {
-                  UserCredential userCredential = await FirebaseAuth.instance
-                      .createUserWithEmailAndPassword(
+                  auth.UserCredential userCredential =
+                      await _auth.createUserWithEmailAndPassword(
                           email: "barry.allen@example.com",
                           password: "SuperSecretPassword!");
                   print(userCredential);
@@ -32,7 +35,34 @@ class LoginPage extends StatelessWidget {
                   print("error");
                 }
               },
-            )
+            ),
+            if (Platform.isIOS)
+              RaisedButton(
+                child: Text("Sign in Apple"),
+                onPressed: () async {
+                  try {
+                    final appleIdCredential =
+                        await SignInWithApple.getAppleIDCredential(
+                      scopes: [
+                        AppleIDAuthorizationScopes.email,
+                        AppleIDAuthorizationScopes.fullName,
+                      ],
+                    );
+                    final oAuthProvider = auth.OAuthProvider('apple.com');
+                    final credential = oAuthProvider.credential(
+                      idToken: appleIdCredential.identityToken,
+                      accessToken: appleIdCredential.authorizationCode,
+                    );
+                    await _auth.signInWithCredential(credential);
+
+                    // TODO: 取得したユーザー情報をriverpodで管理
+
+                    Navigator.of(context).pushNamed(HomePage.routeName);
+                  } on Error {
+                    print("error");
+                  }
+                },
+              )
           ],
         ),
       ),
