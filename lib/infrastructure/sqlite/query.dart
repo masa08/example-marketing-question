@@ -50,40 +50,31 @@ class SqfliteQuery {
           )
           ''');
       await db.execute('''
-          CREATE TABLE category (
-            id TEXT,
-            user_id TEXT,
-            question_id TEXT,
-            result TEXT,
-            created_at TEXT
-          )
-          ''');
-      await db.execute('''
-        insert into chapter 
+        insert into chapter
           select '1', '理論編'
           union all select '2', '実務編'
         ''');
       await db.execute('''
-        insert into category 
+        insert into category
           select '1', '1', '基礎的なフレームワーク'
           union all select '2', '2', 'KPI'
           union all select '3', '2', 'データ分析'
         ''');
       await db.execute('''
-        insert into sub_category 
+        insert into sub_category
           select '1', '1', '基礎的なフレームワーク'
           union all select '2', '2', '効果測定'
         ''');
-    　await db.execute('''
-        insert into question 
-          select '1', '1', '開拓すべき市場を特定するために用いられるフレームワーク「STP」は何を略したものか。', '解答解説が入る。'
-          union all select '2', '1', '「SWOT」はどのような目的で用いられるか。', '解答解説が入る。'
-          union all select '3', '1', '「PEST」はどのような目的で用いられるか。', '解答解説が入る。'
-          union all select '4', '2', '投資効率を表す指標であるROIの正しい求め方はどれか。', '解答解説が入る。'
-          union all select '5', '3', 'ABテストを行って得られた下記のようなデータに対して有意差があったか検定をしたい。適した手法はどれか。', '解答解説が入る。'
-          union all select '6', '3', 'p値の説明として適しているものを選べ。', '解答解説が入る。'
+      await db.execute('''
+        insert into question
+          select '1', '1', '1', '開拓すべき市場を特定するために用いられるフレームワーク「STP」は何を略したものか。', '解答解説が入る。'
+          union all select '2', '1', '1', '「SWOT」はどのような目的で用いられるか。', '解答解説が入る。'
+          union all select '3', '1', '1', '「PEST」はどのような目的で用いられるか。', '解答解説が入る。'
+          union all select '4', '2', '2', '投資効率を表す指標であるROIの正しい求め方はどれか。', '解答解説が入る。'
+          union all select '5', '3', '2', 'ABテストを行って得られた下記のようなデータに対して有意差があったか検定をしたい。適した手法はどれか。', '解答解説が入る。'
+          union all select '6', '3', '2', 'p値の説明として適しているものを選べ。', '解答解説が入る。'
         ''');
-     await db.execute('''
+      await db.execute('''
         insert into selection
           select '1', '1', 'Segmentation, Targeting, Positioning', 'TRUE'
           union all select '2', '1', 'XXX1, XXX2, XXX3', 'FALSE'
@@ -110,8 +101,8 @@ class SqfliteQuery {
           union all select '23', '6', '得られた結果が偶然誤差であることを許容する確率。', 'TRUE'
           union all select '24', '6', '得られた結果がZZZであることを許容する確率。', 'FALSE'
         ''');
-    await db.execute('''
-        insert into user 
+      await db.execute('''
+        insert into user
           select '1', 'Masataka Ushijima', 'masataka@example.com'
           union all select '2', 'Takumi Hashimoto', 'takumi@example.com'
           union all select '3', 'Asami Togawa', 'asami@example.com'
