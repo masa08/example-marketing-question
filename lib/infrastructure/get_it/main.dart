@@ -16,7 +16,7 @@ Future<bool> registerDIContainers() async {
 
 Future<void> registerRepositories(GetIt getIt) async {
   final query = SqfliteQuery();
-  query.initialize();
+  await query.initialize();
 
   getIt
     ..registerSingleton(query)

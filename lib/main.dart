@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/all.dart';
 import 'package:marketing_questions/infrastructure/get_it/main.dart';
 import 'package:marketing_questions/presentation/ui/pages/home.dart';
 import 'package:marketing_questions/presentation/ui/pages/login.dart';
@@ -6,7 +7,7 @@ import 'package:marketing_questions/presentation/ui/pages/question.dart';
 import 'package:marketing_questions/presentation/ui/pages/answer.dart';
 import 'package:marketing_questions/presentation/ui/pages/commentary.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(ProviderScope(child: MyApp()));
 
 class MyApp extends StatelessWidget {
   @override

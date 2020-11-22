@@ -2,29 +2,29 @@ import 'package:sqflite/sqflite.dart';
 
 Future<Database> openSqfliteDatabase() async {
   print(await getDatabasesPath());
-  openDatabase('mq.db', version: 1,
+  return openDatabase('mq.db', version: 1,
       onCreate: (Database db, int version) async {
-        await db.execute('''
+    await db.execute('''
           CREATE TABLE chapter (
             id TEXT,
             name TEXT
           )
           ''');
-        await db.execute('''
+    await db.execute('''
           CREATE TABLE category (
             id TEXT,
             chapter_id TEXT,
             title TEXT
           )
           ''');
-        await db.execute('''
+    await db.execute('''
           CREATE TABLE sub_category (
             id TEXT,
             category_id TEXT,
             title TEXT
           )
           ''');
-        await db.execute('''
+    await db.execute('''
           CREATE TABLE question (
             id TEXT,
             category_id TEXT,
@@ -33,7 +33,7 @@ Future<Database> openSqfliteDatabase() async {
             explanation TEXT
           )
           ''');
-        await db.execute('''
+    await db.execute('''
           CREATE TABLE selection (
             id TEXT,
             question_id TEXT,
@@ -41,30 +41,30 @@ Future<Database> openSqfliteDatabase() async {
             is_answer TEXT
           )
           ''');
-        await db.execute('''
+    await db.execute('''
           CREATE TABLE user (
             id TEXT,
             name TEXT,
             email TEXT
           )
           ''');
-        await db.execute('''
+    await db.execute('''
         insert into chapter
           select '1', '理論編'
           union all select '2', '実務編'
         ''');
-        await db.execute('''
+    await db.execute('''
         insert into category
           select '1', '1', '基礎的なフレームワーク'
           union all select '2', '2', 'KPI'
           union all select '3', '2', 'データ分析'
         ''');
-        await db.execute('''
+    await db.execute('''
         insert into sub_category
           select '1', '1', '基礎的なフレームワーク'
           union all select '2', '2', '効果測定'
         ''');
-        await db.execute('''
+    await db.execute('''
         insert into question
           select '1', '1', '1', '開拓すべき市場を特定するために用いられるフレームワーク「STP」は何を略したものか。', '解答解説が入る。'
           union all select '2', '1', '1', '「SWOT」はどのような目的で用いられるか。', '解答解説が入る。'
@@ -73,7 +73,7 @@ Future<Database> openSqfliteDatabase() async {
           union all select '5', '3', '2', 'ABテストを行って得られた下記のようなデータに対して有意差があったか検定をしたい。適した手法はどれか。', '解答解説が入る。'
           union all select '6', '3', '2', 'p値の説明として適しているものを選べ。', '解答解説が入る。'
         ''');
-        await db.execute('''
+    await db.execute('''
         insert into selection
           select '1', '1', 'Segmentation, Targeting, Positioning', 'TRUE'
           union all select '2', '1', 'XXX1, XXX2, XXX3', 'FALSE'
@@ -100,11 +100,11 @@ Future<Database> openSqfliteDatabase() async {
           union all select '23', '6', '得られた結果が偶然誤差であることを許容する確率。', 'TRUE'
           union all select '24', '6', '得られた結果がZZZであることを許容する確率。', 'FALSE'
         ''');
-        await db.execute('''
+    await db.execute('''
         insert into user
           select '1', 'Masataka Ushijima', 'masataka@example.com'
           union all select '2', 'Takumi Hashimoto', 'takumi@example.com'
           union all select '3', 'Asami Togawa', 'asami@example.com'
         ''');
-      });
+  });
 }

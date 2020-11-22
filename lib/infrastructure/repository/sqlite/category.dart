@@ -8,7 +8,7 @@ class CategorySqfliteRepository extends CategoryRepository {
 
   @override
   Future<bool> get() async {
-    final categories = await _query.select('select * from workbook');
+    final categories = await _query.select('select * from category');
     return true;
   }
 }
