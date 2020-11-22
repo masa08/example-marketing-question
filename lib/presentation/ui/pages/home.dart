@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/all.dart';
+import 'package:marketing_questions/domain/model/category/category.dart';
 import 'package:marketing_questions/presentation/notifier/category.dart';
 import 'package:marketing_questions/presentation/ui/pages/question.dart';
 
@@ -14,11 +15,13 @@ class HomePage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool get = useProvider(categoryProvider).get();
+    final _categoryProvider = useProvider(categoryProvider);
+    _categoryProvider.get();
+    final categories = _categoryProvider.categories;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("CATEGORY PAGE(進捗と問題集) ${get}"),
+        title: Text("CATEGORY PAGE(進捗と問題集)"),
       ),
       body: Center(
         child: Column(
@@ -27,30 +30,14 @@ class HomePage extends HookWidget {
             Text(
               'MQ APP!',
             ),
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).pushNamed(QuestionPage.routeName);
-              },
-              child: Card(
-                child: (Text('マーケティングの歴史')),
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).pushNamed(QuestionPage.routeName);
-              },
-              child: Card(
-                child: (Text('基礎的なフレームワーク')),
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).pushNamed(QuestionPage.routeName);
-              },
-              child: Card(
-                child: (Text('消費者行動論')),
-              ),
-            )
+            ...categories.map<Widget>((category) {
+              return GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pushNamed(QuestionPage.routeName);
+                },
+                child: Text("${category.title}"),
+              );
+            })
           ],
         ),
       ),

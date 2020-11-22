@@ -1,3 +1,4 @@
+import 'package:marketing_questions/domain/model/category/category.dart';
 import 'package:marketing_questions/infrastructure/sqlite/schema.dart';
 import 'package:sqflite/sqflite.dart';
 

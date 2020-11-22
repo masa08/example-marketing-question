@@ -1,5 +1,5 @@
-import 'package:flutter/foundation.dart';
+import 'package:marketing_questions/domain/model/category/category.dart';
 
 abstract class CategoryRepository {
-  Future<bool> get();
+  Future<List<Category>> get();
 }
