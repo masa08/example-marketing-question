@@ -1,4 +1,3 @@
-import 'package:marketing_questions/domain/model/category/category.dart';
 import 'package:marketing_questions/domain/model/category/repository.dart';
 import 'package:marketing_questions/infrastructure/sqlite/query.dart';
 
@@ -8,7 +7,8 @@ class CategorySqfliteRepository extends CategoryRepository {
   final SqfliteQuery _query;
 
   @override
-  Future<bool> search() async {
+  Future<bool> get() async {
+    final categories = await _query.select('select * from workbook');
     return true;
   }
 }
