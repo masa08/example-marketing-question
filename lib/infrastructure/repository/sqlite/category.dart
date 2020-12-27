@@ -10,13 +10,13 @@ class CategorySqfliteRepository extends CategoryRepository {
   @override
   Future<List<Category>> getByTheory() async {
     final categories =
-        await _query.select('select * from category where chapter_id = 1');
+        await _query.select('SELECT * FROM category WHERE chapter_id = 1');
     return categories.map((category) => _mapToCategory(category)).toList();
   }
 
   Future<List<Category>> getByPractical() async {
     final categories =
-        await _query.select('select * from category where chapter_id = 2');
+        await _query.select('SELECT * FROM category WHERE chapter_id = 2');
     return categories.map((category) => _mapToCategory(category)).toList();
   }
 

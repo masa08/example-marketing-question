@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/all.dart';
-import 'package:marketing_questions/domain/model/category/category.dart';
 import 'package:marketing_questions/presentation/notifier/category.dart';
 import 'package:marketing_questions/presentation/ui/pages/question.dart';
 
@@ -35,7 +34,8 @@ class HomePage extends HookWidget {
             ...theoryCategories.map<Widget>((category) {
               return GestureDetector(
                 onTap: () {
-                  Navigator.of(context).pushNamed(QuestionPage.routeName);
+                  Navigator.of(context).pushNamed(QuestionPage.routeName,
+                      arguments: category.id);
                 },
                 child: Text("${category.title}"),
               );
@@ -46,7 +46,8 @@ class HomePage extends HookWidget {
             ...practicalCategories.map<Widget>((category) {
               return GestureDetector(
                 onTap: () {
-                  Navigator.of(context).pushNamed(QuestionPage.routeName);
+                  Navigator.of(context).pushNamed(QuestionPage.routeName,
+                      arguments: category.id);
                 },
                 child: Text("${category.title}"),
               );
