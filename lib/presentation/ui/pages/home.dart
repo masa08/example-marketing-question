@@ -16,8 +16,10 @@ class HomePage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final _categoryProvider = useProvider(categoryProvider);
-    _categoryProvider.get();
-    final categories = _categoryProvider.categories;
+    _categoryProvider.getTheoryCategories();
+    _categoryProvider.getPracticalCategories();
+    final theoryCategories = _categoryProvider.theoryCatories;
+    final practicalCategories = _categoryProvider.practiceCategories;
 
     return Scaffold(
       appBar: AppBar(
@@ -28,9 +30,20 @@ class HomePage extends HookWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'MQ APP!',
+              '[理論編]',
             ),
-            ...categories.map<Widget>((category) {
+            ...theoryCategories.map<Widget>((category) {
+              return GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pushNamed(QuestionPage.routeName);
+                },
+                child: Text("${category.title}"),
+              );
+            }),
+            Text(
+              '[実践編]',
+            ),
+            ...practicalCategories.map<Widget>((category) {
               return GestureDetector(
                 onTap: () {
                   Navigator.of(context).pushNamed(QuestionPage.routeName);

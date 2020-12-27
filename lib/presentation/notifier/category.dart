@@ -10,13 +10,22 @@ class CategoryNotifier with ChangeNotifier {
   final CategoryRepository _categoryRepository =
       GetIt.instance<CategoryRepository>();
 
-  List<Category> _categories = [];
+  List<Category> _theoryCategories = [];
+  List<Category> _practiceCategories = [];
 
-  List<Category> get categories => _categories;
+  List<Category> get theoryCatories => _theoryCategories;
+  List<Category> get practiceCategories => _practiceCategories;
 
-  Future<void> get() {
-    _categoryRepository.get().then((category) {
-      _categories = category;
+  Future<void> getTheoryCategories() {
+    _categoryRepository.getByTheory().then((category) {
+      _theoryCategories = category;
+      notifyListeners();
+    });
+  }
+
+  Future<void> getPracticalCategories() {
+    _categoryRepository.getByPractical().then((category) {
+      _practiceCategories = category;
       notifyListeners();
     });
   }
