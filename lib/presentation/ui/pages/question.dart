@@ -11,9 +11,9 @@ class QuestionPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final categoryId = ModalRoute.of(context).settings.arguments;
+    final subCategoryId = ModalRoute.of(context).settings.arguments;
     final _questionProvider = useProvider(questionProvider);
-    _questionProvider.getByCaterogyId(categoryId: categoryId);
+    _questionProvider.getByCaterogyId(subCategoryId: subCategoryId);
     final questions = _questionProvider.questions;
 
     return Scaffold(

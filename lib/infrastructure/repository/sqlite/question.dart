@@ -8,9 +8,9 @@ class QuestionSqfliteRepository extends QuestionRepository {
   final SqfliteQuery _query;
 
   @override
-  Future<List<Question>> getByCategoryId({String categoryId}) async {
-    final questions = await _query
-        .select('SELECT * FROM question WHERE category_id = $categoryId');
+  Future<List<Question>> getBySubCategoryId({String subCategoryId}) async {
+    final questions = await _query.select(
+        'SELECT * FROM question WHERE sub_category_id = $subCategoryId');
     return questions.map((question) => _mapToCategory(question)).toList();
   }
 

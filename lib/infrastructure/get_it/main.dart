@@ -3,8 +3,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
 import 'package:marketing_questions/domain/model/category/repository.dart';
 import 'package:marketing_questions/domain/model/question/repository.dart';
+import 'package:marketing_questions/domain/model/sub_category/repository.dart';
 import 'package:marketing_questions/infrastructure/repository/sqlite/category.dart';
 import 'package:marketing_questions/infrastructure/repository/sqlite/question.dart';
+import 'package:marketing_questions/infrastructure/repository/sqlite/sub_category.dart';
 import 'package:marketing_questions/infrastructure/sqlite/query.dart';
 
 Future<bool> registerDIContainers() async {
@@ -27,5 +29,8 @@ Future<void> registerRepositories(GetIt getIt) async {
     })
     ..registerLazySingleton<QuestionRepository>(() {
       return QuestionSqfliteRepository(GetIt.instance<SqfliteQuery>());
+    })
+    ..registerLazySingleton<SubCategoryRepository>(() {
+      return SubCategorySqfliteRepository(GetIt.instance<SqfliteQuery>());
     });
 }

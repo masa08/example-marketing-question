@@ -14,9 +14,9 @@ class QuestionProvider with ChangeNotifier {
 
   List<Question> get questions => _questions;
 
-  Future<void> getByCaterogyId({String categoryId}) {
+  Future<void> getByCaterogyId({String subCategoryId}) {
     _questionRepository
-        .getByCategoryId(categoryId: categoryId)
+        .getBySubCategoryId(subCategoryId: subCategoryId)
         .then((question) {
       _questions = question;
       notifyListeners();

@@ -6,6 +6,7 @@ import 'package:marketing_questions/presentation/ui/pages/login.dart';
 import 'package:marketing_questions/presentation/ui/pages/question.dart';
 import 'package:marketing_questions/presentation/ui/pages/answer.dart';
 import 'package:marketing_questions/presentation/ui/pages/commentary.dart';
+import 'package:marketing_questions/presentation/ui/pages/sub_category.dart';
 
 void main() => runApp(ProviderScope(child: MyApp()));
 
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
             // HomePage.routeName: (_) => HomePage(),
             // TODO: login機能を作り直す段階で切り替える
             LoginPage.routeName: (_) => HomePage(),
+            SubCategoryPage.routeName: (_) => SubCategoryPage(),
             QuestionPage.routeName: (_) => QuestionPage(),
             AnswerPage.routeName: (_) => AnswerPage(),
             CommentaryPage.routeName: (_) => CommentaryPage(),

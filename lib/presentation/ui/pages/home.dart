@@ -4,6 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/all.dart';
 import 'package:marketing_questions/presentation/notifier/category.dart';
 import 'package:marketing_questions/presentation/ui/pages/question.dart';
+import 'package:marketing_questions/presentation/ui/pages/sub_category.dart';
 
 class HomePage extends HookWidget {
   HomePage({Key key}) : super(key: key);
@@ -34,7 +35,7 @@ class HomePage extends HookWidget {
             ...theoryCategories.map<Widget>((category) {
               return GestureDetector(
                 onTap: () {
-                  Navigator.of(context).pushNamed(QuestionPage.routeName,
+                  Navigator.of(context).pushNamed(SubCategoryPage.routeName,
                       arguments: category.id);
                 },
                 child: Text("${category.title}"),
@@ -46,7 +47,7 @@ class HomePage extends HookWidget {
             ...practicalCategories.map<Widget>((category) {
               return GestureDetector(
                 onTap: () {
-                  Navigator.of(context).pushNamed(QuestionPage.routeName,
+                  Navigator.of(context).pushNamed(SubCategoryPage.routeName,
                       arguments: category.id);
                 },
                 child: Text("${category.title}"),
